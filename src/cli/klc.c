@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "../core/dat.h"
+#include "../core/util/dat.h"
 
 config cfg;
 
