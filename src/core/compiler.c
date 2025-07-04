@@ -22,5 +22,10 @@ void compile_main(int argc, char* arg[], config* cfg) {
         printf("FATAL: Failed to open file: %s\n", path);
         exit(1);
     }
+    FILE *raw = fopen(path, "r");
+    if (raw == NULL) {
+        printf("FATAL: Failed to open file: %s\n", path);
+        exit(1);
+    }
     exit(0);
 }
