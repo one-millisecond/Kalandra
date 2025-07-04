@@ -3,8 +3,6 @@
 
 #include <stdbool.h>
 
-#define MAX 50
-
 typedef enum {
     KEY,
     ID,
@@ -12,7 +10,7 @@ typedef enum {
 
 typedef struct {
     TokenType type;
-    char value[MAX];
+    char value[50];
 } Token;
 
 #endif

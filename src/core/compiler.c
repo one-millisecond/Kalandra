@@ -8,7 +8,6 @@
 #include "util/table.h"
 #include "util/token.h"
 #include "compile/out.h"
-#include "compile/lex.h"
 #include "compile/parse.h"
 
 void compile_main(int argc, char* arg[], config* cfg) {
@@ -29,6 +28,6 @@ void compile_main(int argc, char* arg[], config* cfg) {
         printf("FATAL: Failed to open file: %s\n", path);
         exit(1);
     }
-    parse_main(lex_main());
+    TokenTable *table = parse_main(&raw);
     exit(0);
 }
