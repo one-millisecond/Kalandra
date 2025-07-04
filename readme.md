@@ -23,7 +23,7 @@ Execute `run.sh`.
 ```bash
 ./run.sh
 ```
-One installed, you can check if it's in PATH.
+Once installed, you can check if it's in PATH.
 ```bash
 klc -h
 ```

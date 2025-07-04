@@ -243,5 +243,5 @@ if [ "${y[0]}" != "x" ]; then
     fi
 fi
 clear -x
-echo "Done!"
+echo "Done (scroll up)"
 q
