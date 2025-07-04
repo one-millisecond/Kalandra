@@ -4,8 +4,8 @@
 #define DAT_H
 
 typedef struct {
-    char out_path[256];
-    char in_path[256];
+    int out_path;
+    int in_path;
 } config;
 
 #endif

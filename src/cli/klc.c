@@ -32,7 +32,7 @@ int main(int argc, char* arg[]) {
                 continue;
             }
             if (i + 1 < argc) {
-                strcpy(cfg.out_path, arg[i + 1]);
+                cfg.in_path = i+1;
                 select_s = true;
                 i++;
             } else {
@@ -40,6 +40,20 @@ int main(int argc, char* arg[]) {
                 return 1;
             }
         }
+        if (!strcmp(arg[i], "-o")) {
+            if (select_o) {
+                printf("WARN: Output path already selected, **ignoring duplicate -o**\n");
+                continue;
+            }
+            if (i + 1 < argc) {
+                cfg.out_path = i+1;
+                select_s = true;
+                i++;
+            } else {
+                printf("FATAL: Missing argument after -o\n");
+                return 1;
+            }
+        }
     }
-    
+
 }
