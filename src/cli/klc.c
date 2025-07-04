@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <libgen.h>
 
 #include "../core/dat.h"
 
@@ -23,13 +24,16 @@ int main(int argc, char* arg[]) {
     }
     bool select_s = 0;
     bool select_o = 0;
+    bool select_a = 0;
     for (int i = 1; i < argc; i++) {
         if (!strcmp(arg[i], "-h")) {
             printf("WARN: -h must be at beginning, **ignoring -h**");
+            continue;
         }
         if (!strcmp(arg[i], "-s")) {
             if (select_s) {
                 printf("WARN: Source file already selected, **ignoring duplicate -s**\n");
+                i++;
                 continue;
             }
             if (i + 1 < argc) {
@@ -40,10 +44,12 @@ int main(int argc, char* arg[]) {
                 printf("FATAL: Missing argument after -s\n");
                 return 1;
             }
+            continue;
         }
         if (!strcmp(arg[i], "-o")) {
             if (select_o) {
                 printf("WARN: Output path already selected, **ignoring duplicate -o**\n");
+                i++;
                 continue;
             }
             if (i + 1 < argc) {
@@ -54,7 +60,25 @@ int main(int argc, char* arg[]) {
                 printf("FATAL: Missing argument after -o\n");
                 return 1;
             }
+            continue;
         }
+        if (!strcmp(arg[i], "-a")) {
+            if (select_o) {
+                printf("WARN: Assembly output already selected, **ignoring duplicate -a**\n");
+                continue;
+            }
+            cfg.outtype = 1;
+            continue;
+        }
+        printf("FATAL: Invalid argument (%d, '%s')\n", i, arg[i]);
+        return 1;
+    }
+    if (!select_s) {
+        printf("FATAL: Source never given\n");
+        return 1;
+    } else if (!select_o) {
+        cfg.out_path = cfg.in_path;
+        cfg.no_o_select = 1;
     }
     compile_main(argc, arg);
 }
