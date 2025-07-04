@@ -2,23 +2,32 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include <libgen.h>
 
 #include "../core/dat.h"
 
 config cfg;
 
 int main(int argc, char* arg[]) {
-    printf("Kalandra Compiler v0.0.0\n");
     if (argc < 2) {
         printf("`%s -h` for help.\n", arg[0]);
         return 1;
     } else if (!strcmp(arg[1], "-h")) {
-        printf("# Kalandra Compiler Version 0.0.0\n**See `## Notes` in `readme.md`.**\n\n"
-            "## Compiler\n"
+        printf("# Kalandra Language Compiler\n**See `## Notes` in `readme.md`.**\n\n"
+            "## Compiling\n"
             "- `-s` : Link source code path\n"
-            "- `-o` : Link output path\n\n"
-            "- `-a` : Output only 8086 assembly\n"
+            "- `-o` : Link output path\n"
+            "- `-a` : Output only Intel 8086/8088 assembly\n\n"
+            "## Kalandra CLI\n\n"
+            "- `-v` : Show Kalandra Langauge Compiler (KLC) version details\n\n"
+        );
+        return 0;
+    } else if (!strcmp(arg[1], "-v")) {
+        printf("# Kalandra Language Compiler\n**See `## Notes` in `readme.md`.**\n\n"
+            "## Version\n"
+            "- Syntax Version: KPL21\n"
+            "- Compiler Version: 0.0.0 (Linux-x86_64)\n\n"
+            "## Compiler Architectures\n\n"
+            "-m 86 : Compile to Intel 8086/8088\n\n"
         );
         return 0;
     }
@@ -27,7 +36,10 @@ int main(int argc, char* arg[]) {
     bool select_a = 0;
     for (int i = 1; i < argc; i++) {
         if (!strcmp(arg[i], "-h")) {
-            printf("WARN: -h must be at beginning, **ignoring -h**");
+            printf("WARN: `-h` must be at beginning, **ignoring -h**\n");
+            continue;
+        } else if (!strcmp(arg[i], "-v")) {
+            printf("WARN: `-v` must be at beginning, **ingoring -v**\n");
             continue;
         }
         if (!strcmp(arg[i], "-s")) {
