@@ -6,6 +6,7 @@
 typedef struct {
     int out_path;
     int in_path;
+    bool outtype;
 } config;
 
 #endif

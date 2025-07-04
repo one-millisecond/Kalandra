@@ -118,7 +118,7 @@ if ! which nasm > /dev/null 2>&1; then
 fi
 
 s=0
-o=("x86 (8088)")
+o=("x86 (8086)")
 y=("+")
 tput civis
 

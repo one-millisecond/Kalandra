@@ -4,6 +4,6 @@
 
 #include "dat.h"
 
-void compile_main() {
+void compile_main(int argc, char* arg[]) {
     exit(0);
 }

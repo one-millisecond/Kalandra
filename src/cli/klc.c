@@ -17,6 +17,7 @@ int main(int argc, char* arg[]) {
             "## Compiler\n"
             "- `-s` : Link source code path\n"
             "- `-o` : Link output path\n\n"
+            "- `-a` : Output only 8086 assembly\n"
         );
         return 0;
     }
@@ -55,5 +56,5 @@ int main(int argc, char* arg[]) {
             }
         }
     }
-
+    compile_main(argc, arg);
 }
