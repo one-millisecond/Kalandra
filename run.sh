@@ -1,5 +1,4 @@
 #!/bin/bash
-clear
 
 q() {
     tput cnorm
@@ -7,6 +6,25 @@ q() {
     exit 0
 }
 
+clear
+echo "Kalandra v0.0.0 Self-Installer"
+echo
+read -p "Do you agree to the license? (Y/N): " answer
+case "$answer" in
+    [Yy])
+        ;;
+    [Nn])
+        clear
+        echo "FATAL: License agreement is required."
+        q
+        ;;
+    *)
+        clear
+        echo "FATAL: Invalid input"
+        q
+        ;;
+esac
+clear
 
 if [ -f /etc/os-release ]; then
     . /etc/os-release
@@ -16,65 +34,88 @@ else
 fi
 
 if ! which gcc > /dev/null 2>&1; then
+    clear
+    echo "Kalandra v0.0.0 Self-Installer
+    "
     echo "GCC is not installed."
     read -p "Do you wish to install it? (Y/N): " answer
-    answer=$(echo "$answer" | tr '[:lower:]' '[:upper:]')
 
-    if [[ "$answer" == "Y" ]]; then
-        echo "Installing: gcc.."
-        if [[ "$OS" == "ubuntu" || "$OS" == "debian" ]]; then
-            sudo apt-get update
-            sudo apt-get install -y gcc
-        elif [[ "$OS" == "fedora" ]]; then
-            sudo dnf install -y gcc
-        elif [[ "$OS" == "arch" ]]; then
-            sudo pacman -Syu --noconfirm gcc
-        else
+    case "$answer" in
+        Yy)
+            echo "Installing: gcc.."
+            case "$OS" in
+                ubuntu|debian)
+                    sudo apt-get update
+                    sudo apt-get install -y gcc
+                    ;;
+                fedora)
+                    sudo dnf install -y gcc
+                    ;;
+                arch)
+                    sudo pacman -Syu --noconfirm gcc
+                    ;;
+                *)
+                    clear
+                    echo "FATAL: Unsupported package manager"
+                    q
+                    ;;
+            esac
+            ;;
+        Nn)
             clear
-            echo "FATAL: Unsupported package manager"
+            echo "FATAL: Missing depend: gcc"
             q
-        fi
-    elif [[ "$answer" == "N" ]]; then
-        clear
-        echo "FATAL: Missing depend: gcc"
-        q
-    else
-        clear
-        echo "FATAL: Invalid input"
-        q
-    fi
+            ;;
+        *)
+            clear
+            echo "FATAL: Invalid input"
+            q
+            ;;
+    esac
+    clear
 fi
 
 if ! which nasm > /dev/null 2>&1; then
+    clear
+    echo "Kalandra v0.0.0 Self-Installer
+    "
     echo "NASM is not installed."
     read -p "Do you wish to install it? (Y/N): " answer
-    answer=$(echo "$answer" | tr '[:lower:]' '[:upper:]')
 
-    if [[ "$answer" == "Y" ]]; then
-        echo "Installing: nasm.."
-        if [[ "$OS" == "ubuntu" || "$OS" == "debian" ]]; then
-            sudo apt-get update
-            sudo apt-get install -y nasm
-        elif [[ "$OS" == "fedora" ]]; then
-            sudo dnf install -y nasm
-        elif [[ "$OS" == "arch" ]]; then
-            sudo pacman -Syu --noconfirm nasm
-        else
+    case "$answer" in
+        Yy)
+            echo "Installing: nasm.."
+            case "$OS" in
+                ubuntu|debian)
+                    sudo apt-get update
+                    sudo apt-get install -y nasm
+                    ;;
+                fedora)
+                    sudo dnf install -y nasm
+                    ;;
+                arch)
+                    sudo pacman -Syu --noconfirm nasm
+                    ;;
+                *)
+                    clear
+                    echo "FATAL: Unsupported OS"
+                    q
+                    ;;
+            esac
+            ;;
+        Nn)
             clear
-            echo "FATAL: Unsupported OS"
+            echo "FATAL: Missing depend: nasm"
             q
-        fi
-    elif [[ "$answer" == "N" ]]; then
-        clear
-        echo "FATAL: Missing depend: nasm"
-        q
-    else
-        clear
-        echo "FATAL: Invalid input"
-        q
-    fi
+            ;;
+        *)
+            clear
+            echo "FATAL: Invalid input"
+            q
+            ;;
+    esac
+    clear
 fi
-
 
 s=0
 o=("x86 (8088)")
@@ -83,9 +124,9 @@ tput civis
 
 d() {
     clear
-    echo "Installer"
-    echo ""
-    echo "Select compiler output options:"
+    echo "Kalandra v0.0.0 Self-Installer
+
+Select compiler output options:"
 
     for i in "${!o[@]}"; do
         if [ "$i" -eq "$s" ]; then
@@ -96,11 +137,12 @@ d() {
     done
 
     echo "
-    
-ENTER   =   'Select/deselect'
+
+SPACE   =   'Select/deselect'
+ENTER   =   'Next section'
 UP      =   'Cursor up'
 DOWN    =   'Cursor down'
-SPACE   =   'Next section'
+ENTER   =   'Next section'
 Q       =   'Quit'"
 }
 
@@ -121,14 +163,14 @@ while true; do
                 fi
             fi
             ;;
-        "")
+        ' ')
             if [ "${y[s]}" == "x" ]; then
                 y[s]="+" 
             else
                 y[s]="x"
             fi
             ;;
-        ' ')
+        "")
             break
             ;;
         q)
@@ -137,6 +179,8 @@ while true; do
             ;;
     esac
 done
+
+clear
 
 # check for no selection
 ax=true
@@ -147,11 +191,57 @@ for i in "${y[@]}"; do
     fi
 done
 if $ax; then
-    clear
     echo "Fatal: No compiler output types selected."
     q
 fi
 
+# install path
+clear
+echo "Kalandra v0.0.0 Self-Installer
+
+Enter install path (blank for /usr/bin):"
+read -p "Install to: " answer
+
+if [[ -z "$answer" ]]; then
+    path="/usr/bin"
+else
+    path="$answer"
+fi
+
+clear
+echo "Kalandra v0.0.0 Self-Installer
+
+Installing to: $path"
+read -p "Confirm? (Y/N): " answer
+case "$answer" in
+    [Yy])
+        ;;
+    [Nn])
+        clear
+        echo "Installation cancelled"
+        q
+        ;;
+    *)
+        clear
+        echo "FATAL: Invalid input"
+        q
+        ;;
+esac
+
 # installing
 clear
-echo "Compiling KalandraCompiler (x86)"
+echo "Kalandra v0.0.0 Self-Installer
+"
+
+if [ "${y[0]}" != "x" ]; then
+    echo "Installing KalandraCompiler (x86).."
+    sudo gcc src/cli/klc.c src/core/compiler.c -o "$path/klc"
+    if [ ! $? -eq 0 ]; then
+        clear -x
+        echo "FATAL: Build failed (scroll up)"
+        q
+    fi
+fi
+clear
+echo "Done!"
+q

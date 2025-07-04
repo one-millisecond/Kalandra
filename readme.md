@@ -23,3 +23,11 @@ Execute `run.sh`.
 ```bash
 ./run.sh
 ```
+One installed, you can check if it's in PATH.
+```bash
+klc -h
+```
+
+## Notes:
+- Kalandra currently only supports flat `.bin` 8088 output.
+- Kalandra currently doesn't support linking.
