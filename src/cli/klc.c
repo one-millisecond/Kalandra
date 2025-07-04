@@ -92,5 +92,5 @@ int main(int argc, char* arg[]) {
         cfg.out_path = cfg.in_path;
         cfg.no_o_select = 1;
     }
-    compile_main(argc, arg);
+    compile_main(argc, arg, &cfg);
 }

@@ -242,6 +242,6 @@ if [ "${y[0]}" != "x" ]; then
         q
     fi
 fi
-clear
+clear -x
 echo "Done!"
 q
