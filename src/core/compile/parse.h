@@ -8,8 +8,13 @@
 #ifndef PARSE_H
 #define PARSE_H
 
-void parse_main(Vector* src) {
-    
+void parse_main(Vector* src, Vector* tokv) {
+    for (size_t i = 0; i < src->size; ++i) {
+        char* line = (char*)vect_get(src, i);
+        if (!strcmp(line[0], "#")) {
+            
+        }
+    }
 }
 
 #endif

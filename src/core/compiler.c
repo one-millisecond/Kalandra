@@ -13,8 +13,12 @@
 
 void compile_main(int argc, char* arg[], config* cfg) {
     Vector src;
-    vect_init(&src, 10);
+    vect_init(&src, 1);
+    Vector tokv;
+    vect_init(&tokv, 10);
     lex_main(arg, cfg, &src);
-    parse_main(&src)
+    parse_main(&src, &tokv);
+    vect_free(&tokv);
+    vect_free(&src);
     exit(0);
 }
