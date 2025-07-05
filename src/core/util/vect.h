@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef VECT_H
+#define VECT_H
+
 typedef struct {
     void **data;
     size_t size;
@@ -35,3 +38,5 @@ void vect_free(Vector *vec) {
     vec->size = 0;
     vec->capacity = 0;
 }
+
+#endif
