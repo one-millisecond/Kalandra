@@ -4,8 +4,7 @@
 #include <string.h>
 
 #include "../util/dat.h"
-#include "../util/table.h"
-#include "../util/token.h"
+#include "../util/vect.h"
 
 #ifndef OUT_H
 #define OUT_H

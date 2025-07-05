@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/bash
 q() {
     tput cnorm
     echo "Quitting.."

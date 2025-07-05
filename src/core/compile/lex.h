@@ -5,6 +5,7 @@
 #include <limits.h>
 
 #include "../util/vect.h"
+#include "../util/dat.h"
 
 void lex_main(char* arg[], config* cfg) {
     char cd[PATH_MAX];
@@ -24,5 +25,5 @@ void lex_main(char* arg[], config* cfg) {
         printf("FATAL: Failed to open file: %s\n", path);
         exit(1);
     }
-    fclose();
+    fclose(raw);
 }

@@ -6,10 +6,12 @@
 
 #include "compile/out.h"
 #include "compile/parse.h"
+#include "compile/lex.h"
+#include "util/dat.h"
 
 #include "util/vect.h"
 
 void compile_main(int argc, char* arg[], config* cfg) {
-    lex_main(arg, &cfg);
+    lex_main(arg, cfg);
     exit(0);
 }
