@@ -2,12 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../util/vect.h"
 #include "../util/dat.h"
 
 #ifndef PARSE_H
 #define PARSE_H
 
-void parse_main() {
+void parse_main(Vector* src) {
     
 }
 
