@@ -17,7 +17,7 @@ int main(int argc, char* arg[]) {
             "- `-s` : Link source code path\n"
             "- `-o` : Link output path\n"
             "- `-a` : Output only Intel 8086/8088 assembly\n\n"
-            "## Kalandra CLI\n\n"
+            "## Kalandra CLI\n"
             "- `-v` : Show Kalandra Langauge Compiler (KLC) version details\n\n"
         );
         return 0;
@@ -26,8 +26,8 @@ int main(int argc, char* arg[]) {
             "## Version\n"
             "- Syntax Version: KPL21\n"
             "- Compiler Version: 0.0.0 (Linux-x86_64)\n\n"
-            "## Compiler Architectures\n\n"
-            "-m 86 : Compile to Intel 8086/8088\n\n"
+            "## Compiler Architectures\n"
+            "- `-m 86` : Compile to Intel 8086/8088\n\n"
         );
         return 0;
     }

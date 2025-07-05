@@ -4,11 +4,10 @@
 #include <unistd.h>
 #include <limits.h>
 
-#include "util/dat.h"
-#include "util/table.h"
-#include "util/token.h"
 #include "compile/out.h"
 #include "compile/parse.h"
+
+#include "util/vect.h"
 
 void compile_main(int argc, char* arg[], config* cfg) {
     char cd[PATH_MAX];
@@ -28,6 +27,5 @@ void compile_main(int argc, char* arg[], config* cfg) {
         printf("FATAL: Failed to open file: %s\n", path);
         exit(1);
     }
-    TokenTable *table = parse_main(&raw);
     exit(0);
 }

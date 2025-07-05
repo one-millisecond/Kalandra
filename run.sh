@@ -61,14 +61,10 @@ if ! which gcc > /dev/null 2>&1; then
                     ;;
             esac
             ;;
-        Nn)
-            clear
-            echo "FATAL: Missing depend: gcc"
-            q
-            ;;
         *)
             clear
-            echo "FATAL: Invalid input"
+            echo "FATAL: Installation cancelled
+FATAL: Missing depend: gcc"
             q
             ;;
     esac
@@ -103,14 +99,10 @@ if ! which nasm > /dev/null 2>&1; then
                     ;;
             esac
             ;;
-        Nn)
-            clear
-            echo "FATAL: Missing depend: nasm"
-            q
-            ;;
         *)
             clear
-            echo "FATAL: Invalid input"
+            echo "FATAL: Installation cancelled
+FATAL: Missing depend: nasm"
             q
             ;;
     esac
@@ -216,14 +208,9 @@ read -p "Confirm? (Y/N): " answer
 case "$answer" in
     [Yy])
         ;;
-    [Nn])
-        clear
-        echo "Installation cancelled"
-        q
-        ;;
     *)
         clear
-        echo "FATAL: Invalid input"
+        echo "FATAL: Installation cancelled"
         q
         ;;
 esac
