@@ -18,13 +18,17 @@ void parse_main(Vector* src, Vector* tokv, config* cfg) {
         // ID_FN check
         if (!strncmp(line, "fn ", 3)) {
             if (cfg->e_debug) {
-                printf("`FN` : %d, %s\n",i,line);
+                printf("DEBUG: fn : %d, %s\n",i,line);
             }
             char buf[32];
             size_t k = 0;
             for (size_t j = 3; line[j] != '(' && k < sizeof(buf) - 1; ++j, ++k) {
                 if (line[j] == '\0') {
-                    printf("**FATAL:** Syntax Error Line %d (function with no parameters)\n%d: %s\n", i+1, i+1, line);
+                    printf("FATAL: Syntax Error Line %d (function with no parameters)\n%d: %s\n", i+1, i+1, line);
+                    for (size_t o = 0; o < j; o++) {
+                        printf("-");
+                    }
+                    printf("# (parameters where?)\n");
                     exit(1);
                 }
                 buf[k] = line[j];
@@ -34,27 +38,6 @@ void parse_main(Vector* src, Vector* tokv, config* cfg) {
             Tok fn_token = tok_new(ID_FN, buf);
             vect_push(tokv, &fn_token);
             if (line[k] == '(') {
-                k++;
-                char param_buf[32];
-                size_t param_index = 0;
-
-                while (line[k] != '\0') {
-                    if (line[k] == ',') {
-                        param_buf[param_index] = '\0';
-                        Tok param_token = tok_new(ID_VAR, param_buf);
-                        if (line[k] == ')') {
-                        
-                        }
-                        vect_push(tokv, &param_token);
-                        param_index = 0;
-                        
-                    } else {
-                        if (param_index < sizeof(param_buf) - 1) {
-                            param_buf[param_index++] = line[k];
-                        }
-                    }
-                    k++;
-                }
             }
             continue;
         }
