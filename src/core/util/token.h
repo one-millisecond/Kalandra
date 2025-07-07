@@ -2,19 +2,27 @@
 #define TOKEN_H
 
 typedef enum {
-    TOKEN_UNKNOWN = 0,  // unknown
-    TOKEN_IDENTIFIER,   // var, fn, etc
-    TOKEN_KEYWORD,      // if, while, etc
-    TOKEN_OPERATOR,     // +, -, etc
-    TOKEN_NUMBER,       // 123, 321, etc
-    TOKEN_STRING,       // "hello", 'c', etc
-    TOKEN_SYMBOL,       // ;, (), etc
-    TOKEN_EOF           // end of file
-} TokenType;
+    T_UNKNOWN,
+    EOL,
+    KEYW,
+    TYPE,
+    ID_FN,
+    ID_INT,
+    ID_CHAR,
+    ID_PTR_C,
+    ID_PTR_I
+} TType;
 
 typedef struct {
-    TokenType type;
+    TType type;
     char* value;
-} Token;
+} Tok;
+
+Tok tok_new(TType type, char* value) {
+    Tok token;
+    token.type = type;
+    token.value = value;
+    return token;
+}
 
 #endif

@@ -8,6 +8,7 @@ typedef struct {
     int in_path;
     bool outtype;
     bool no_o_select;
+    bool e_debug;
 } config;
 
 #endif

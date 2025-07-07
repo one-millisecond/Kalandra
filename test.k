@@ -1,3 +1,3 @@
-#fn main()
-    print("Test!");
-nf
+fn main() -> void {
+  ret 0
+}
