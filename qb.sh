@@ -1,4 +1,5 @@
 clear
+mkdir -p build
 # assemble
 nasm src/boot/boot.s -o build/bootloader.bin
 # compile
