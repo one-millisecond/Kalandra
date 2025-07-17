@@ -8,8 +8,8 @@ void print(const char __far* s, unsigned int color) {
     int i = 0;
     int j = 0;
     for (i; s[j] != '\n';) {
-        text[i] == (uint16_t)s[j] | (uint16_t)color << 8;
+        text[i] == s[j] | color << 8;
     }
 }
 
-#endif]
+#endif
