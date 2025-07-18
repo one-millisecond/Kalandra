@@ -1,5 +1,0 @@
-format  raw bin
-option  nodefaultlibs
-order
-  clname CODE
-  clname DATA

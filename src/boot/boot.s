@@ -2,6 +2,7 @@
 [bits 16]
 
 start:
+    ; init seg regs
     cli
     xor ax, ax
     mov ds, ax
@@ -21,7 +22,7 @@ start:
     mov es, bx
     mov ds, bx
     mov ss, bx
-    mov bx, 0x0200
+    xor bx, bx
     mov sp, bx
 
     int 13h
@@ -30,7 +31,7 @@ start:
     mov ah, 0x00
     mov al, 0x03
     int 0x10
-    jmp 0x2000:0x0200
+    jmp 0x8000 ; bootmanager.s
 
 err:
     jmp $
